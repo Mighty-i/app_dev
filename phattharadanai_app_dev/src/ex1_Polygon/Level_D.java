@@ -162,7 +162,7 @@ public class Level_D extends JPanel implements MouseListener, MouseMotionListene
 			lastPoint = newPoint;
 			lastIndex = newIndex++;
 		}		
-		test;
+	
 	}
 	
 	public void paintComponent(Graphics g) {
