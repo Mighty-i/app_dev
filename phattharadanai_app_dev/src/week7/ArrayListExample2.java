@@ -16,10 +16,16 @@ class Fruit {
 		this.price = price;
 	}
 	
+//	public String toString() {
+//		String data = "id:" + id + ", name:" + name +
+//				", price:" + price;
+//		return data;
+//	}
+	
 	public String toString() {
-		String data = "id:" + id + ", name:" + name +
-				", price:" + price;
-		return data;
+		String dataString = "id:" + id + ",name:" + name +
+				",price:" + price;
+		return dataString;
 	}
 	
 }
