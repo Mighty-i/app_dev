@@ -115,6 +115,8 @@ public class Level_D extends JPanel implements MouseListener, MouseMotionListene
 			polyPoint = it.next();
 			if (isNear(point, polyPoint)) {
 				pointNearMouse = polyPoint;
+				Point firstPoint = points.get(0);
+				if()
 			}
 		}
 
