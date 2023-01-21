@@ -1,29 +1,26 @@
 package week8_thaicreate_jtable;
 
+
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class JTable3 extends JFrame {
-
-	/**
-	 * Launch the application.
-	 */
+public class MyJTableFruit extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
 			public void run() {
-				JTable3 frame = new JTable3();
+				// TODO Auto-generated method stub
+				MyJTableFruit frame = new MyJTableFruit();
 				frame.setVisible(true);
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.X
-	 */
-	public JTable3() {
+	public MyJTableFruit() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 580, 242);
 		setTitle("ThaiCreate.Com Java GUI Tutorial");
@@ -41,27 +38,25 @@ public class JTable3 extends JFrame {
 		// Model for Table
 		DefaultTableModel model = (DefaultTableModel)table.getModel();
 		model.addColumn("No");
-		model.addColumn("CustomerID");
+		model.addColumn("ID");
 		model.addColumn("Name");
-		model.addColumn("Email");
-		model.addColumn("CountryCode");
-		model.addColumn("Budget");
-		model.addColumn("Used");
-		model.addColumn("po");
-		
+		model.addColumn("price");
+	
+		Fruit[] fruit = {
+				new Fruit(1, 99 ,"Mango", 20),
+				new Fruit(2, 100 ,"Banana", 30)
+		};
 		// Data Row
-		for(int i=0;i <= 10; i++)
+		for(int i=0;i < fruit.length; i++)
 		{
 			model.addRow(new Object[0]);
 			model.setValueAt(i+1, i, 0);
-			model.setValueAt("Data Col 1", i, 1);
-			model.setValueAt("Data Col 2", i, 2);
-			model.setValueAt("Data Col 3", i, 3);
-			model.setValueAt("Data Col 4", i, 4);
-			model.setValueAt("Data Col 5", i, 5);
-			model.setValueAt("Data Col 6", i, 6);
-			model.setValueAt("Data Col 7", i, 7);
-		}
+			model.setValueAt(fruit[1].no, i, 1);
+			model.setValueAt(fruit[2].id, i, 2);
+			model.setValueAt(fruit[3].name, i, 3);
+			model.setValueAt(fruit[4].price, i, 4);
 		
+		}
 	}
+	
 }

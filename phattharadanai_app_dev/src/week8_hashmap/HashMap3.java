@@ -18,7 +18,7 @@ class HashMap3 {
 			System.out.println(m.getKey() + " " + m.getValue());
 		}
 		System.out.println("Updated list of elements:");
-		hm.replace(101, "Vijay", "Ravi");
+		hm.replace(101, "Vi", "Ravi");
 		for (Map.Entry m : hm.entrySet()) {
 			System.out.println(m.getKey() + " " + m.getValue());
 		}

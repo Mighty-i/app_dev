@@ -9,6 +9,7 @@ public class HashMap2 {
 		map.put(101, "Vijay");
 		map.put(102, "Rahul");
 		map.put(103, "Gaurav");
+		map.put(104, "pwx");
 		System.out.println("Initial list of elements: " + map);
 		// key-based removal
 		map.remove(100);
