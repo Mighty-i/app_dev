@@ -1,10 +1,13 @@
 package ex3;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.tools.JavaCompiler;
@@ -14,210 +17,139 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-public class JTableAmountModel2 extends JPanel implements TableModelListener ,java.awt.event.ActionListener {
-    private boolean DEBUG = false;
-    private JTable table;
-    
-    int COL_PRICE = 2;
-	int COL_QUANTITY = 3;
-	int COL_AMOUNT = 4;
+public class JTableAmountModel2 extends JPanel {
 
+	int frameWidth = 500;
+	int frameHeight = 100;
 
-    public JTableAmountModel2() {
-        super(new GridLayout(1,0));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        String[] columnNames = {"Good",
-                                "Unit Name",
-                                "Price",
-                                "Quantity",
-                                "Amount"};
+	int width = 500;
+	int height = 450;
 
-       
-        MyTableModel model = new MyTableModel( columnNames);
-        final JTable table = new JTable(model);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-        table.getModel().addTableModelListener(this);
+	JTextField requesdateField;
+	JTextField duedateField;
+	JTextField requesterField;
 
-        if (DEBUG) {
-            table.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    printDebugData(table);
-                }
-            });
-        }
+	private static final String readfile = "readfile";
+	private static final String writefile = "writefile";
 
-        JScrollPane scrollPane = new JScrollPane(table);
+	public JTableAmountModel2() {
+		super(new GridLayout(1, 0));
 
- 
-        add(scrollPane);
-      //Add a print button.
-        JButton printButton = new JButton("Print");
-        printButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        printButton.addActionListener(this);
-        add(printButton);
-    }
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setSize(width, height);
 
-    private void printDebugData(JTable table) {
-    }
+		JLabel requestDateLabel = new JLabel("Request Date");
+		JLabel dueDateLabel = new JLabel("Request Date");
+		JLabel requesterLabel = new JLabel("Requester");
 
-    public void tableChanged(TableModelEvent ev) {
+		
 
-    }
-    @Override
-	public void actionPerformed(java.awt.event.ActionEvent ignore) {
-		// TODO Auto-generated method stub
-		MessageFormat header = new MessageFormat("Page {0,number,integer}");
-        try {
-			table.print(JTable.PrintMode.FIT_WIDTH, header, null);
-        } catch (java.awt.print.PrinterException e) {
-            System.err.format("Cannot print %s%n", e.getMessage());
-        }
+		requesdateField = new JTextField(20);
+		duedateField = new JTextField(20);
+		requesterField = new JTextField(20);
+
+		panel.add(requestDateLabel);
+		panel.add(dueDateLabel);
+		panel.add(requesterLabel);
+
+		
+
+		panel.add(requesdateField);
+		panel.add(duedateField);
+		panel.add(requesterField);
+
+		
+
+		requesdateField.setBounds(60, 30, 100, 20);
+		duedateField.setBounds(240, 30, 100, 20);
+		requesterField.setBounds(420, 30, 100, 20);
+
+		
+
+		requestDateLabel.setBounds(60, 10, requestDateLabel.getPreferredSize().width,
+				requestDateLabel.getPreferredSize().height);
+		dueDateLabel.setBounds(240, 10, dueDateLabel.getPreferredSize().width, dueDateLabel.getPreferredSize().height);
+		requesterLabel.setBounds(420, 10, requesterLabel.getPreferredSize().width,
+				requesterLabel.getPreferredSize().height);
+
+		String[] columnNames = { "Good", "Unit Name", "Price", "Quantity", "Amount" };
+
+		Object[][] data = { { "Coke can", "Can", new Integer(15), new Integer(0), new Integer(0) },
+				{ "Fanta 1.5 Litre", "Bottle", new Integer(25), new Integer(0), new Integer(0) },
+				{ "Soap Parrot", "Bar", new Integer(20), new Integer(0), new Integer(0) },
+				{ "Orange Jam", "Can", new Integer(35), new Integer(0), new Integer(0) }, };
+
+		MyTableModel model = new MyTableModel(data, columnNames);
+		final JTable table = new JTable(model);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(45, 60, frameWidth, frameHeight);
+		panel.add(scrollPane);
+		add(panel);
+
+		// Add a print button.
+		JButton printButton = new JButton("Print");
+		printButton.setBounds(55, 186, 80, 30);
+		panel.add(printButton);
+		printButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MessageFormat header = new MessageFormat("Page {0,number,integer}");
+				try {
+					table.print(JTable.PrintMode.FIT_WIDTH, header, null);
+				} catch (java.awt.print.PrinterException ex) {
+					System.err.format("Cannot print %s%n", ex.getMessage());
+				}
+			}
+		});
+
+		JButton readfileButton1 = new JButton("ReadFile");
+		readfileButton1.setBounds(186, 186, 100, 30);
+		panel.add(readfileButton1);
+
+		JButton writefileButton = new JButton("WriteFile");
+		writefileButton.setBounds(326, 186, 100, 30);
+		panel.add(writefileButton);
+		printButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
 	}
-    
-    class MyTableModel extends AbstractTableModel {
-    	
-        private String[] columnNames;
-        private Object[][] data;
 
-        public MyTableModel( String[] columnNames) {
-        	
-        	dao goodDAO = new dao();
-        	ArrayList<good> goods = goodDAO.ViewDAO();
-        	
-        	Object[][] data = new Object[goods.size()][];
-        	int j=0;
-        	for(good good:goods) {
-        		Object obj[] = new Object[5];
-        		obj[0] = good.getGood();
-        		obj[1] = good.getName();
-        		obj[2] = good.getPrice();
-        		obj[3] = good.getQty();
-        		obj[4] = good.getAmount();
-        		data[j++] = obj;	
-        	}
-       		this.columnNames = columnNames;
-       		this.data = data;
-     
-       	}
+	private static void createAndShowGUI() {
 
-        public int getColumnCount() {
-            return columnNames.length;
-        }
+		JFrame frame = new JFrame("JTableAmount");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600, 500);
 
-        public int getRowCount() {
+		JTableAmountModel2 newContentPane = new JTableAmountModel2();
+		newContentPane.setOpaque(true);
+		frame.getContentPane().add(newContentPane);
 
-            return data.length;
-        }
+		frame.pack();
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+	}
 
-        public String getColumnName(int col) {
+	public static void main(String[] args) {
 
-            return columnNames[col];
-        }
-
-        public Object getValueAt(int row, int col) {
-
-            return data[row][col];
-        }
-
-        public Class getColumnClass(int c) {
-
-            return getValueAt(0, c).getClass();
-        }
-
-        public boolean isCellEditable(int row, int col) {
-
-            if (col < 2) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        public void setValueAt(Object value, int row, int col) {
-        	System.out.println("setValueAt()... row:" + row + "x" + "col:" + col);
-            if (DEBUG) {
-                System.out.println("Setting value at " + row + "," + col
-                                   + " to " + value
-                                   + " (an instance of "
-                                   + value.getClass() + ")");
-            }
-
-            data[row][col] = value;
-            fireTableCellUpdated(row, col);
-            if(col == COL_QUANTITY) {
-            	try {
-            		String strQuantity = value.toString();
-                	Integer intQuantity = Integer.parseInt(strQuantity);
-                	int quantity = intQuantity.intValue();
-                	String strPrice = data[row][COL_PRICE].toString();
-                	Integer intPrice = Integer.parseInt(strPrice);
-                	int price = intPrice.intValue();
-                	int amount = quantity * price;
-                	System.out.println("quantity:" + quantity + ", price:" + price +
-                			", amount:" + amount);
-                	data[row][COL_AMOUNT] = amount;
-            	} catch(NumberFormatException ex) {
-            		ex.printStackTrace();
-            	}
-            }
-            fireTableCellUpdated(row, COL_QUANTITY);
-
-            if (DEBUG) {
-                System.out.println("New value of data:");
-                printDebugData();
-            }
-        }
-
-        private void printDebugData() {
-        	System.out.println("printDebugData()...");
-            int numRows = getRowCount();
-            int numCols = getColumnCount();
-
-            for (int i=0; i < numRows; i++) {
-                System.out.print("    row " + i + ":");
-                for (int j=0; j < numCols; j++) {
-                    System.out.print("  " + data[i][j]);
-                }
-                System.out.println();
-            }
-            System.out.println("--------------------------");
-        }
-    }
-
-    
-    private static void createAndShowGUI() {
-   
-        JFrame frame = new JFrame("JTableAmount");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    
-        JTableAmountModel2 newContentPane = new JTableAmountModel2();
-        newContentPane.setOpaque(true);
-        frame.setContentPane(newContentPane);
-
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
-
-	
-
-	
-
-	
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
 
 }
