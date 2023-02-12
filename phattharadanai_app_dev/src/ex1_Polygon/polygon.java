@@ -15,7 +15,7 @@ import java.util.Iterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class polygon_asshole_1 extends JPanel implements MouseMotionListener, MouseListener {
+public class polygon extends JPanel implements MouseMotionListener, MouseListener {
 
 	int width = 900;
 	int height = 900;
@@ -28,7 +28,7 @@ public class polygon_asshole_1 extends JPanel implements MouseMotionListener, Mo
 	Point startMousePosition = null;
 	boolean isDraggingPolygon = false;
 
-	public polygon_asshole_1() {
+	public polygon() {
 
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setOpaque(true);
@@ -43,7 +43,7 @@ public class polygon_asshole_1 extends JPanel implements MouseMotionListener, Mo
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Paint");
-		frame.getContentPane().add(new polygon_asshole_1());
+		frame.getContentPane().add(new polygon());
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
