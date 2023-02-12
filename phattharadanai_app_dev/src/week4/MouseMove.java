@@ -130,7 +130,7 @@ public class MouseMove extends JPanel implements MouseListener, MouseMotionListe
 			int y2 = point.y - h / 2;
 
 			g2.fillOval(x2, y2, w2, h2);
-			g2.drawRect(x, y, w, h);
+//			g2.drawRect(x, y, w, h);
 
 		}
 	}

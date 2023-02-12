@@ -4,216 +4,122 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import java.util.List;
 
-public class Level_D extends JPanel implements MouseListener, MouseMotionListener {
+public class Level_D  {
 
-	int width = 600;
-	int height = 400;
+	private static final int PANEL_WIDTH = 600;
+    private static final int PANEL_HEIGHT = 600;
 
-	int nearness = 2;
+    public static class Drawing extends JPanel {
 
-	Point pointNearMouse;
+        private static final Font FONT = new Font("Arial", Font.PLAIN, 12);
 
-	ArrayList<Point> points;
+        private List<Polygon> polygons = new ArrayList<Polygon>();
 
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouseClicked()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				// ", point:" + point +
-				", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-		points.add(point);
-		repaint();
+        private Polygon currentPolygon = new Polygon();
 
-	}
+        private MouseAdapter mouseListener = new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    if (e.getClickCount() == 1) {
+                        addPoint(e.getX(), e.getY());
+                    } else if (e.getClickCount() == 2) {
+                        createPolygon();
+                    }
+                } else if (SwingUtilities.isRightMouseButton(e)) {
+                    clearCurrentPolygon();
+                }
+            }
 
-	public void mouseEntered(MouseEvent e) {
-		System.out.println("mouseEntered()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-	}
+        };
 
-	public void mouseExited(MouseEvent e) {
-		System.out.println("mouseExited()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-	}
+        public Drawing() {
+            addMouseListener(mouseListener);
+        }
 
-	public void mousePressed(MouseEvent e) {
-		System.out.println("mousePressed()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-	}
+        protected void addPoint(int x, int y) {
+            currentPolygon.addPoint(x, y);
+            repaint();
+        }
 
-	public void mouseReleased(MouseEvent e) {
-		System.out.println("mouseReleased()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-	}
+        protected void clearCurrentPolygon() {
+            currentPolygon = new Polygon();
+            repaint();
+        }
 
-	public void mouseDragged(MouseEvent e) {
-		System.out.println("mouseDragged()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-		System.out.println(
-				// "source:" + source +
-				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-	}
+        protected void createPolygon() {
+            if (currentPolygon.npoints > 2) {
+                
+				polygons.add(currentPolygon);
+            }
+            clearCurrentPolygon();
+            repaint();
+        }
 
-	public void mouseMoved(MouseEvent e) {
-//		System.out.println("mouseMoved()");
-		Object source = e.getSource();
-		Point point = e.getPoint();
-		int x = e.getX();
-		int y = e.getY();
-		int xOs = e.getXOnScreen();
-		int yOs = e.getYOnScreen();
-//		System.out.println(
-//				// "source:" + source +
-//				", point:" + point + ", x:" + x + ", y:" + y + ", xOs:" + xOs + ", yOs:" + yOs);
-		pointNearMouse = null;
-		Point polyPoint = null;
-		for (Iterator<Point> it = points.iterator(); it.hasNext();) {
-			polyPoint = it.next();
-			if (isNear(point, polyPoint)) {
-				pointNearMouse = polyPoint;
-				Point firstPoint = points.get(0);
-				if()
-			}
-		}
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
+        }
 
-//		if(pointNearMouse != null) {
-		repaint();
-//		}
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(Color.RED);
+            g.setFont(FONT);
+            
+			for (Polygon polygon : polygons) {
+                drawPolygon(g, polygon);
+            }
+            g.setColor(Color.GREEN);
+            drawPolygon(g, currentPolygon);
+        }
 
-	}
-	
-	boolean isNear(Point p1, Point p2) {
-		boolean near = false;
-		int deltaX = (p2.x-p1.x);
-		int deltaY = (p2.y-p1.y);
-		double distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-		if(Math.round(distance) <= nearness) {
-			near = true;
-		}
-		return near;
-	}
-	
-	public void paintComponentOld(Graphics g) {
-		System.out.println("paintComponent()");
-		Graphics2D g2 = (Graphics2D)g;
-		g2.setColor(Color.RED);
-		int newIndex = 0;
-		Point newPoint = null;
-		int lastIndex = 0;
-		Point lastPoint = null;
-		for(Iterator<Point> it=points.iterator(); it.hasNext();) {
-			newPoint = it.next();
-			// paint last point
-			if(newIndex >= 0) {
-				newPoint = points.get(newIndex);
-				int x = newPoint.x - 1;
-				int y = newPoint.y - 1;
-				int w = 2;
-				int h = 2;
-				g2.drawRect(x, y, w, h);;
-			}
-			System.out.println("newIndex:" + newIndex + ", lastIndex:" + lastIndex);
-			if(newIndex > 0) {
-				lastPoint = points.get(lastIndex);
-				g2.drawLine(newPoint.x, newPoint.y, lastPoint.x, lastPoint.y);
-			}
-			lastPoint = newPoint;
-			lastIndex = newIndex++;
-		}		
-	
-	}
-	
-	public void paintComponent(Graphics g) {
-		System.out.println("paintComponent()");
-		Graphics2D g2 = (Graphics2D)g;
-		g2.setColor(Color.RED);
-		int i=0;
-		for(Iterator<Point> it=points.iterator(); it.hasNext();) {
-			Point point = it.next();
-			int w = 2;
-			int h = 2;
-			if(pointNearMouse != null && pointNearMouse.equals(point)) {
-				w *= 2;
-				h *= 2;
-				g2.setColor(Color.GREEN);
-			}
-			int x = point.x - (w/2);
-			int y = point.y - (h/2);
-			
-			g2.fillRect(x, y, w, h);
-			g2.setColor(Color.RED);
-			
-			if(i>0) {
-				Point lastPoint = points.get(i-1);
-				g2.drawLine(x+1, y+1, lastPoint.x, lastPoint.y);
-			}
-			i++;
-			
-		}
-	}
+        private void drawPolygon(Graphics g, Polygon polygon) {
+            if (polygon.npoints < 3) {
+                if (polygon.npoints == 1) {
+                    g.fillOval(polygon.xpoints[0] - 2, polygon.ypoints[0] - 2, 4, 4);
+                    drawNthPoint(g, polygon, 0);
+                } else if (polygon.npoints == 2) {
+                    g.drawLine(polygon.xpoints[0], polygon.ypoints[0], polygon.xpoints[1], polygon.ypoints[1]);
+                    drawNthPoint(g, polygon, 0);
+                    drawNthPoint(g, polygon, 1);
+                }
+            } else {
+                g.drawPolygon(polygon);
+                for (int i = 0; i < polygon.npoints; i++) {
+                    drawNthPoint(g, polygon, i);
+                }
+            }
+        }
 
-	public Level_D() {
+        private void drawNthPoint(Graphics g, Polygon polygon, int nth) {
+            // Only works 26 times!
+            String name = Character.toString((char) ('A' + nth));
+            int x = polygon.xpoints[nth];
+            int height = g.getFontMetrics().getHeight();
+            int y = polygon.ypoints[nth] < height ? polygon.ypoints[nth] + height : polygon.ypoints[nth];
+            g.drawString(name, x, y);
+        }
 
-		setPreferredSize(new Dimension(width, height));
-		setOpaque(true);
-		addMouseListener(this);
-		addMouseMotionListener(this);
+    }
 
-		points = new ArrayList<Point>();
+    protected static void initUI() {
+        JFrame frame = new JFrame("test");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new Drawing());
+        frame.pack();
+        frame.setVisible(true);
+    }
 
-		pointNearMouse = null;
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
 
-	}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		Level_D mouseMove = new Level_D();
-		frame.add(mouseMove);
-		frame.pack();
-		frame.setVisible(true);
-	}
+            @Override
+            public void run() {
+                initUI();
+            }
+        });
+    }
 }

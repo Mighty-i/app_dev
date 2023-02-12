@@ -1,6 +1,8 @@
 package week9window;
 
 import java.awt.*;
+
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -10,7 +12,7 @@ public class AddPage extends JPanel {
 	public AddPage() {
 		
 		setBackground(Color.GRAY);
-		setBounds(0, 0, 500, 300);
+		setBounds(50, 50, 500, 300);
 		setLayout(null);
 		
 		JLabel label = new JLabel("AddPage");
