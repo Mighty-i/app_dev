@@ -20,10 +20,11 @@ public class Ex12JMenu extends JFrame implements ActionListener {
 	
 	Ex12Main ex12Main;
 	
-	// Ex12FormAdd ex12FormAdd;
+	 Ex12FormAdd ex12FormAdd;
 	// Ex12FormEdit ex12FormEdit;
 	// Ex12FormDelete ex12FormDelete;
 	// Ex12FormSearch ex12FormSearch;
+	 Ex12FormViewFruit ex12FormViewFruit;
 	Ex12FormView ex12FormView;
 	
 	JPanel mainPanel;
@@ -34,6 +35,7 @@ public class Ex12JMenu extends JFrame implements ActionListener {
 	final static String DELETE_STR = "Delete";
 	final static String SEARCH_STR = "Search";
 	final static String VIEW_STR = "View";
+	final static String VIEWFRUIT_STR = "ViewFruit";
 	final static String EXIT_STR = "Exit";
 	
 	final static String CANCEL_STR = "Cancel";
@@ -56,6 +58,7 @@ public class Ex12JMenu extends JFrame implements ActionListener {
 		JMenuItem menuDelete = new JMenuItem(DELETE_STR);
 		JMenuItem menuSearch = new JMenuItem(SEARCH_STR);
 		JMenuItem menuView = new JMenuItem(VIEW_STR);
+		JMenuItem menuViewFruit = new JMenuItem(VIEWFRUIT_STR);
 		JMenuItem menuExit = new JMenuItem(EXIT_STR);
 		
 		menuAdd.addActionListener(this);
@@ -63,6 +66,7 @@ public class Ex12JMenu extends JFrame implements ActionListener {
 		menuDelete.addActionListener(this);
 		menuSearch.addActionListener(this);
 		menuView.addActionListener(this);
+		menuViewFruit.addActionListener(this);
 		menuExit.addActionListener(this);
 		
 		mainMenu.add(menuAdd);
@@ -70,18 +74,20 @@ public class Ex12JMenu extends JFrame implements ActionListener {
 		mainMenu.add(menuDelete);
 		mainMenu.add(menuSearch);
 		mainMenu.add(menuView);
+		mainMenu.add(menuViewFruit);
 		mainMenu.add(menuExit);
 		jMenuBar.add(mainMenu);
 		setJMenuBar(jMenuBar);
 		
-		// ex12FormAdd = new Ex12FormAdd(ex12Main);
+		 ex12FormAdd = new Ex12FormAdd(ex12Main);
 		// ex12FormEdit = new Ex12FormEdit(ex12Main);
 		// ex12FormDelete = new Ex12FormDelete(ex12Main);
 		// ex12FormSearch = new Ex12FormSearch(ex12Main);
+		 ex12FormViewFruit = new Ex12FormViewFruit(ex12Main);
 		ex12FormView = new Ex12FormView(ex12Main);
 		
 		mainPanel = new JPanel(new CardLayout());
-		// mainPanel.add(ex12FormAdd, ADD_STR);
+		 mainPanel.add(ex12FormAdd, ADD_STR);
 		// mainPanel.add(ex12FormEdit, EDIT_STR);
 		// mainPanel.add(ex12FormDelete, DELETE_STR);
 		// mainPanel.add(ex12FormSearch, SEARCH_STR);
