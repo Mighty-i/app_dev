@@ -22,7 +22,7 @@ public class SupplyChainSim {
 	
 	Branch[] branches = {
 			new Branch(001,	"Tahkhonyang"),
-			new Branch(002,	"Khamreang"),asd
+			new Branch(002,	"Khamreang"),
 			new Branch(003,	"Donyom"),
 			new Branch(004,	"Kantara"),
 			new Branch(005,	"Dondum")
