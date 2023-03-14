@@ -30,7 +30,8 @@ public class SupplyChainSim {
 	
 	Taxinvoice[] taxinvoice = {
 			new Taxinvoice(001,	"Yes"),
-			new Taxinvoice(002,	"No")
+			new Taxinvoice(002,	"No"),
+			new Taxinvoice(003, "Ok")
 			
 	};
 
