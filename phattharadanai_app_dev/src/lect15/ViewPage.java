@@ -57,6 +57,7 @@ public class ViewPage extends JPanel implements ActionListener {
 		model.addColumn("Price");
 		model.addColumn("Quantity");
 		model.addColumn("Amount");
+		model.addColumn("Taxinvoice");
 		
 		JButton btView = new JButton(STR_VIEW);
 		width = btView.getPreferredSize().width;
@@ -103,6 +104,7 @@ public class ViewPage extends JPanel implements ActionListener {
 			data.add(transaction.price);
 			data.add(transaction.quantity);
 			data.add(transaction.amount);
+			data.add(transaction.taxinvoice);
 			model.addRow(data);
 			
 		}

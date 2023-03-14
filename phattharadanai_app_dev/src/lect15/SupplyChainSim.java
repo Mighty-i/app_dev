@@ -27,6 +27,13 @@ public class SupplyChainSim {
 			new Branch(004,	"Kantara"),
 			new Branch(005,	"Dondum")
 	};
+	
+	Taxinvoice[] taxinvoice = {
+			new Taxinvoice(001,	"Yes"),
+			new Taxinvoice(002,	"No")
+			
+	};
+
 
 	Transaction[] transactions;
 	public SupplyChainSim(int no) {
@@ -34,16 +41,19 @@ public class SupplyChainSim {
 		Simulator branchSim = new Simulator();
 		Simulator goodSim = new Simulator();
 		Simulator quantSim = new Simulator();
+		Simulator taxSim = new Simulator();
 		int noData = no;
 		transactions = new Transaction[noData];
 		int[] custIdArr = custSim.genIntUniformDist(noData, 0, customers.length - 1, 1);
 		int[] branchIdArr = branchSim.genIntUniformDist(noData, 0, branches.length - 1, 1);
 		int[] goodIdArr = goodSim.genIntUniformDist(noData, 0, goods.length - 1, 1);
 		int[] quantArr = quantSim.genIntUniformDist(noData, 1, 10, 1);
+		int[] taxArr = taxSim.genIntUniformDist(noData, 0, taxinvoice.length - 1, 1);
 		System.out.println("custIdArr.length:" + custIdArr.length);
 		System.out.println("branchIdArr.length:" + branchIdArr.length);
 		System.out.println("goodIdArr.length:" + goodIdArr.length);
 		System.out.println("quantArr.length:" + quantArr.length);
+		System.out.println("taxArr.length:" + taxArr.length);
 		for(int i=0; i<noData; i++) {
 			int customerId = customers[custIdArr[i]].id;
 			int branchId = branches[branchIdArr[i]].id;
@@ -52,8 +62,9 @@ public class SupplyChainSim {
 			double price = goods[goodIdArr[i]].price;
 			int quantity = quantArr[i];
 			double amount = price * quantity;
+			String tax = taxinvoice[taxArr[i]].neet;
 			Transaction transaction = new Transaction(customerId, branchId, date, goodId, 
-					price, quantity, amount);
+					price, quantity, amount, tax);
 			transactions[i] = transaction;
 			System.out.println("i:" + i + ", transaction:" + transaction.toString());
 

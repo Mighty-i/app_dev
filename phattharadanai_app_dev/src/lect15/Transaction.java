@@ -9,9 +9,10 @@ public class Transaction {
 	double price;
 	int quantity;
 	double amount;
+	String taxinvoice;
 	
 	public Transaction(int customerId, int branchId, String date, 
-			int goodId, double price, int quantity, double amount
+			int goodId, double price, int quantity, double amount, String taxinvoice
 	) {
 		this.customerId = customerId;
 		this.branchId = branchId;
@@ -20,6 +21,7 @@ public class Transaction {
 		this.price = price;
 		this.quantity = quantity;
 		this.amount = amount;
+		this.taxinvoice = taxinvoice;
 	}
 
 	public String toString() {
@@ -27,7 +29,7 @@ public class Transaction {
 		String data;
 		data = "customerId:" + customerId + ", branchId:" + branchId + ", date:" + date +
 				", goodId:" + goodId + ", price:" + price + ", quantity:" + quantity +
-				", amount:" + amount;
+				", amount:" + amount + ", taxinvoice:" + taxinvoice;
 		return data;
 		
 	}
