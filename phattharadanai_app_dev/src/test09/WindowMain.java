@@ -41,8 +41,8 @@ public class WindowMain implements ActionListener {
 		ViewListPage viewListPage = new ViewListPage();
 		
 //		frame.getContentPane().add(mainPage);
-		frame.getContentPane().add(addPage);
-//		frame.getContentPane().add(editPage);
+//		frame.getContentPane().add(addPage);
+		frame.getContentPane().add(editPage);
 //		frame.getContentPane().add(deletePage);
 //		frame.getContentPane().add(viewPage);
 //		frame.getContentPane().add(viewListPage);
