@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Ex2MyLineGraph extends JPanel {
+public class LineGraph extends JPanel {
 	
 	final static int PAD_RIGHT = 50;
 	final static int PAD_LEFT = 100;
@@ -32,13 +32,13 @@ public class Ex2MyLineGraph extends JPanel {
 	
 	double valueRatio;
 
-	public Ex2MyLineGraph(int dataBound, int[] data) {
+	public LineGraph(int dataBound, int[] data) {
 		
 		this(800, 600, dataBound, data);
 		
 	}
 	
-	public Ex2MyLineGraph(int w, int h, int dataBound, int[] data) {
+	public LineGraph(int w, int h, int dataBound, int[] data) {
 		
 		super();
 		

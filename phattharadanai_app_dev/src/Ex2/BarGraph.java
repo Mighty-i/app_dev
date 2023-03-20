@@ -6,7 +6,7 @@ import javax.swing.*;
 
 
 
-public class Ex2MyBarGraph extends JPanel {
+public class BarGraph extends JPanel {
 	
 	final static int PAD_RIGHT = 50;
 	final static int PAD_LEFT = 100;
@@ -38,13 +38,13 @@ public class Ex2MyBarGraph extends JPanel {
 	double valueRatio;
 
 
-	public Ex2MyBarGraph(int dataBound, int[] data, int barwidth, int graphwidth) {
+	public BarGraph(int dataBound, int[] data, int barwidth, int graphwidth) {
 
 		this(800, 600, dataBound, data, barwidth, graphwidth);
 		
 	}
 	
-	public Ex2MyBarGraph(int w, int h, int dataBound, int[] data, int bw, int gw) {
+	public BarGraph(int w, int h, int dataBound, int[] data, int bw, int gw) {
 		
 		super();
 		

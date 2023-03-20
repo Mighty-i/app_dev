@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.swing.*;
 
-public class Ex2Generator extends JPanel implements ActionListener {
+public class Generator extends JPanel implements ActionListener {
 
 	static final String BOUND_STR = "bound";
 	static final String NUMBER_STR = "number";
@@ -15,8 +15,8 @@ public class Ex2Generator extends JPanel implements ActionListener {
 	static final String GENERATE_STR = "Generate";
 
 	Random random;
-	Ex2MyBarGraph barGraph;
-	Ex2MyLineGraph lineGraph;
+	BarGraph barGraph;
+	LineGraph lineGraph;
 
 	JTextField boundTextField;
 	JTextField numberTextField;
@@ -44,10 +44,10 @@ public class Ex2Generator extends JPanel implements ActionListener {
 	static int width = 1200;
 	static int height = 900;
 
-	Ex2MyBarGraph myBG;
-	Ex2MyLineGraph myLG;
+	BarGraph myBG;
+	LineGraph myLG;
 
-	public Ex2Generator() {
+	public Generator() {
 
 		setLayout(null);
 		setPreferredSize(new Dimension(width, height));
@@ -146,7 +146,7 @@ public class Ex2Generator extends JPanel implements ActionListener {
 
 			tabbedPane.removeAll();
 
-			myLG = new Ex2MyLineGraph(bound, array);
+			myLG = new LineGraph(bound, array);
 			tabbedPane.addTab("Line Graph", myLG);
 
 			bw = 40;
@@ -157,7 +157,7 @@ public class Ex2Generator extends JPanel implements ActionListener {
 			if (strGW.isEmpty() == false) {
 				gw = Integer.parseInt(strGW);
 			}
-			myBG = new Ex2MyBarGraph(bound, array, bw, gw);
+			myBG = new BarGraph(bound, array, bw, gw);
 			tabbedPane.addTab("Bar Graph", myBG);
 
 		}
@@ -180,7 +180,7 @@ public class Ex2Generator extends JPanel implements ActionListener {
 		JFrame frame = new JFrame("Ex2");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JComponent newContentPane = new Ex2Generator();
+		JComponent newContentPane = new Generator();
 		newContentPane.setOpaque(true); // <-- content panes must be opaque
 		frame.setContentPane(newContentPane);
 
