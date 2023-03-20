@@ -18,14 +18,8 @@ public class Test02A  extends JPanel
         setPreferredSize(new Dimension(500, 300));
         String[] patternExamples = {
                  "dd MMMMM yyyy",
-                 "dd.MM.yy",
-                 "MM/dd/yy",
-                 "yyyy.MM.dd G 'at' hh:mm:ss z",
-                 "EEE, MMM d, ''yy",
-                 "h:mm a",
-                 "H:mm:ss:SSS",
-                 "K:mm a,z",
-                 "yyyy.MMMMM.dd GGG hh:mm aaa"
+                 "dd.MM.yy"
+                 
                  };
 
         currentPattern = patternExamples[0];
