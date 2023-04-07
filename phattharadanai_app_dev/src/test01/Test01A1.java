@@ -16,13 +16,13 @@ public class Test01A1 extends JPanel{
 		setLayout(null);
 		
 		JLabel label = new JLabel ("A Simple Form");
-		label.setBounds(10, 10,label.getPreferredSize().width, label.getPreferredSize().height);
+		label.setBounds(10, 10,100, 100);
 		JLabel labelname = new JLabel ("name");
-		labelname.setBounds(10, 100,labelname.getPreferredSize().width, labelname.getPreferredSize().height);
+		labelname.setBounds(10, 100,100,100);
 		JTextField nameTxt = new JTextField(30);
-		nameTxt.setBounds(80, 100,nameTxt.getPreferredSize().width, nameTxt.getPreferredSize().height);
+		nameTxt.setBounds(50, 140,100, 20);
 		JButton btnname = new JButton ("A Simple Form");
-		btnname.setBounds(10, 200,btnname.getPreferredSize().width, btnname.getPreferredSize().height);
+		btnname.setBounds(50, 190,100, 30);
 		add(label);
 		add(labelname);
 		add(nameTxt);
