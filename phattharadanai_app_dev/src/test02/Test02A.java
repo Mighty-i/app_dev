@@ -19,7 +19,6 @@ public class Test02A  extends JPanel
         String[] patternExamples = {
                  "dd MMMMM yyyy",
                  "dd.MM.yy"
-                 
                  };
 
         currentPattern = patternExamples[0];
